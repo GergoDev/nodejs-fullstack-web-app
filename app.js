@@ -5,6 +5,7 @@ const flash = require('connect-flash')
 const markdown = require('marked')
 const sanitizeHTML = require('sanitize-html')
 const csrf = require('csurf')
+
 const app = express()
 
 app.use(express.urlencoded({extended:false}))
@@ -33,7 +34,7 @@ app.use(function(req, res, next) {
     res.locals.success = req.flash('success')
     res.locals.errors = req.flash('errors')
 
-    // Make UserID avaible within every request
+    // Make UserID avaible on request object
     if(req.session.user) {req.visitorId = req.session.user._id} else {req.visitorId = 0}
 
     // Make session data avaible within ejs templates
